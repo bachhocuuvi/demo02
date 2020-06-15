@@ -1,0 +1,41 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+    <title>User Management with SpringBoot</title>
+</head>
+<body>
+    <div class="container col-6">
+        <h2>User Management</h2>
+        <form th:object="${search}" th:action="@{/search}" method="get">
+            <input type="text" name="name" id="name" th:value="${search}">
+            <input type="submit" value="search">
+        </form>
+
+        <table class="table table-active">
+            <tr>
+                <th>Name</th>
+                <th>Email</th>
+                <th>Phone</th>
+                <th>CRUD</th>
+            </tr>
+            <tr th:each="user:${users}">
+                <td th:text="${user.name}"></td>
+                <br>
+                <td th:text="${user.email}"></td>
+                <br>
+                <td th:text="${user.phone}"></td>
+                <br>
+                <td>
+                    <a th:href="@{/edit?id={id}(id=${user.id})}" class="btn btn-dark">Edit</a>
+                    <a th:href="@{/delete?id={id}(id=${user.id})}" class="btn btn-danger">Delete</a>
+                </td>
+            </tr>
+
+        </table>
+        <a href="/add" class="btn btn-success">Create new User</a>
+    </div>
+
+</body>
+</html>
